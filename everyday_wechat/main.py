@@ -134,13 +134,17 @@ def send_alarm_msg(key):
     diff_time = get_diff_time(gf.get('start_date'), gf.get('start_date_msg'))
     sweet_words = gf.get('sweet_words')
     send_msg = '\n'.join(
-        x for x in [calendar_info, weather, horoscope, dictum, diff_time, sweet_words] if x)
+        x for x in [calendar_info, weather, horoscope] if x)
+    send_msg2 = '\n'.join(
+        x for x in [dictum, diff_time, sweet_words] if x)
     # print('\n' + send_msg + '\n')
     if not send_msg or not is_online(): return
     uuid_list = gf.get('uuid_list')
     for uuid in uuid_list:
         time.sleep(1)
         itchat.send(send_msg, toUserName=uuid)
+        time.sleep(1)
+        itchat.send(send_msg2, toUserName=uuid)
     print('\n定时内容:\n{}\n发送成功...\n\n'.format(send_msg))
     print('自动提醒消息发送完成...\n')
 

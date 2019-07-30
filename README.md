@@ -293,6 +293,7 @@ pip3 install -r requirements.txt
 
 ```
 python run.py
+screen python run.py #可以使用screen让程序后台运行
 ```
 
 第一次运行会跳出二维码，扫码登录。如输出日志中打印成：『登录成功』，则表示运行成功。  
@@ -302,7 +303,10 @@ python run.py
 -  docker 下运行
     - 构建 `docker build -t everyday_wechat:v1 .`
     - 运行 `docker run everyday_wechat:v1`
-
+    
+## 常见问题
+#### 1. 报错ithcat持续登陆问题(itchat.auto_login(hotReload=True)
+删除itchat.pkl文件，重新登陆，[参考](https://blog.csdn.net/weixin_43886198/article/details/89115754)
 ## 示例截图：
 
 ![日志](https://raw.githubusercontent.com/sfyc23/image/master/vlog/20190613171703.png)

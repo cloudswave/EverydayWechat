@@ -16,6 +16,7 @@ from everyday_wechat.utils.data_collection import (
 from everyday_wechat.utils.common import (
     FILEHELPER,
 )
+from everyday_wechat.utils.pattern_helper import handle_msg_helper
 
 __all__ = ['handle_friend']
 
@@ -42,6 +43,12 @@ def handle_friend(msg):
         # 好友叫啥，用于打印
         nick_name = FILEHELPER if uuid == FILEHELPER else msg.user.nickName
         print('\n{}发来信息：{}'.format(nick_name, receive_text))
+        
+        retext = handle_msg_helper(receive_text, uuid, None)
+        if retext:
+            itchat.send(retext, toUserName=uuid)
+            return
+        
         reply_text = get_bot_info(receive_text, uuid)  # 获取自动回复
         if reply_text:  # 如内容不为空，回复消息
             time.sleep(random.randint(1, 2))  # 休眠一秒，保安全。想更快的，可以直接注释。
